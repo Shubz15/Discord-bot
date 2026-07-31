@@ -11,7 +11,7 @@ client.on("messageCreate", (message)=>{
 });
 
 client.on("interactionCreate",(intraction)=>{
-
+      
 })
 
 client.login(process.env.DISCORD_TOKEN);
