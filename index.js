@@ -13,6 +13,14 @@ const client = new Client({
 client.commands = new Collection();
 
 await connectDB();
+// import User from "./models/User.js";
+
+// await User.create({
+//   discordId: "123456789",
+//   username: "Test User",
+// });
+
+console.log("Test user inserted");
 
 import readyEvent from "./events/ready.js";
 import messageEvent from "./events/messageCreate.js";
