@@ -18,7 +18,7 @@ export default (client) => {
 
         }
 
-        message.reply("Hi 👋");
+        message.reply("Hiii");
     });
 
 };
