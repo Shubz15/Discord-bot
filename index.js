@@ -1,17 +1,25 @@
-import 'dotenv/config';
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import "dotenv/config";
+import { Client, Collection, GatewayIntentBits } from "discord.js";
+import connectDB from "./config/database.js";
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages,GatewayIntentBits.MessageContent] });
-
-client.on("messageCreate", (message)=>{
-      if(message.author.bot) return ;
-      message.reply({
-            content:"hii from bot"
-      })
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+    ],
 });
 
-client.on("interactionCreate",(intraction)=>{
-      
-})
+client.commands = new Collection();
+
+await connectDB();
+
+import readyEvent from "./events/ready.js";
+import messageEvent from "./events/messageCreate.js";
+import interactionEvent from "./events/interactionCreate.js";
+
+readyEvent(client);
+messageEvent(client);
+interactionEvent(client);
 
 client.login(process.env.DISCORD_TOKEN);
