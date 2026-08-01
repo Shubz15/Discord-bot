@@ -20,7 +20,7 @@ await connectDB();
 //   username: "Test User",
 // });
 
-console.log("Test user inserted");
+//console.log("Test user inserted");
 
 import readyEvent from "./events/ready.js";
 import messageEvent from "./events/messageCreate.js";

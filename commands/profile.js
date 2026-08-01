@@ -15,14 +15,14 @@ export default {
 
         if (!user) {
             return interaction.reply({
-                content: "❌ User not found!",
+                content: "User not found!",
                 ephemeral: true,
             });
         }
 
-        // ✅ Create the Embed HERE
+        // Create the Embed 
         const embed = new EmbedBuilder()
-            .setTitle("👤 User Profile")
+            .setTitle("User Profile")
             .setColor("Blue")
             .setThumbnail(interaction.user.displayAvatarURL())
             .addFields(
