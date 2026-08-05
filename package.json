@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-      "register": "node config/registerCommand.js"
+    "register": "node config/registerCommand.js"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +16,8 @@
     "discord.js": "^14.27.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.9.0"
+    "mongoose": "^9.9.0",
+    "nanoid": "^6.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
