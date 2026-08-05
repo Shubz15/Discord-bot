@@ -7,6 +7,7 @@ import connectDB from "./config/database.js";
 import readyEvent from "./events/ready.js";
 import messageEvent from "./events/messageCreate.js";
 import interactionEvent from "./events/interactionCreate.js";
+import urlRoutes from "./routes/urlRoutes.js";
 
 import fs from "fs";
 import path from "path";
@@ -22,7 +23,7 @@ app.listen(PORT, () => {
     console.log(`Express Server Running on Port ${PORT}`);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,3 +64,4 @@ messageEvent(client);
 interactionEvent(client);
 
 client.login(process.env.DISCORD_TOKEN);
+//client.login(process.env.DISCORD_TOKEN);
