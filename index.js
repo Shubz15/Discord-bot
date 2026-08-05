@@ -1,3 +1,4 @@
+import express from "express";
 import "dotenv/config";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
 
@@ -10,6 +11,18 @@ import interactionEvent from "./events/interactionCreate.js";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
+
+const app = express();
+
+app.use("/", urlRoutes);
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Express Server Running on Port ${PORT}`);
+});
+
+client.login(process.env.DISCORD_TOKEN);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
