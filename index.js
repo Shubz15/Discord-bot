@@ -1,6 +1,18 @@
 import "dotenv/config";
 import { Client, Collection, GatewayIntentBits } from "discord.js";
+
 import connectDB from "./config/database.js";
+
+import readyEvent from "./events/ready.js";
+import messageEvent from "./events/messageCreate.js";
+import interactionEvent from "./events/interactionCreate.js";
+
+import fs from "fs";
+import path from "path";
+import { fileURLToPath, pathToFileURL } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const client = new Client({
     intents: [
@@ -13,18 +25,25 @@ const client = new Client({
 client.commands = new Collection();
 
 await connectDB();
-// import User from "./models/User.js";
 
-// await User.create({
-//   discordId: "123456789",
-//   username: "Test User",
-// });
+// Load Commands
+const commandsPath = path.join(__dirname, "commands");
 
-//console.log("Test user inserted");
+const commandFiles = fs
+    .readdirSync(commandsPath)
+    .filter(file => file.endsWith(".js"));
 
-import readyEvent from "./events/ready.js";
-import messageEvent from "./events/messageCreate.js";
-import interactionEvent from "./events/interactionCreate.js";
+for (const file of commandFiles) {
+
+    const filePath = path.join(commandsPath, file);
+
+    const command = await import(pathToFileURL(filePath).href);
+
+    client.commands.set(command.default.data.name, command.default);
+
+    console.log("Loaded Command:", command.default.data.name);
+
+}
 
 readyEvent(client);
 messageEvent(client);
