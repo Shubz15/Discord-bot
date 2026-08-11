@@ -23,15 +23,42 @@ export default {
 
             const answer = await askGemini(question);
 
-            await interaction.editReply(answer);
+            const maxLength = 1900;
+
+            if (answer.length <= maxLength) {
+
+                await interaction.editReply(answer);
+
+                return;
+            }
+
+            const chunks = [];
+
+            for (let i = 0; i < answer.length; i += maxLength) {
+
+                chunks.push(answer.substring(i, i + maxLength));
+
+            }
+
+            await interaction.editReply(chunks[0]);
+
+            for (let i = 1; i < chunks.length; i++) {
+
+                await interaction.followUp(chunks[i]);
+
+            }
 
         } catch (error) {
 
             console.error("Gemini Error:", error);
 
-            await interaction.editReply(
-                "Unable to get a response from Gemini."
-            );
+            if (interaction.deferred) {
+
+                await interaction.editReply(
+                    "Unable to get a response from Gemini."
+                );
+
+            }
 
         }
 
