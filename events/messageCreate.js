@@ -22,7 +22,7 @@ export default (client) => {
                     avatar: message.author.displayAvatarURL(),
                 });
 
-                console.log(`✅ New user created: ${user.username}`);
+                console.log(`New user created: ${user.username}`);
 
             }
 
@@ -35,7 +35,7 @@ export default (client) => {
                 user.xp = 0;
 
                 message.channel.send(
-                    `🎉 Congratulations ${message.author}, you reached Level ${user.level}!`
+                    ` Congratulations ${message.author}, you reached Level ${user.level}!`
                 );
             }
 
