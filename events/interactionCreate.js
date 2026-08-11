@@ -8,7 +8,10 @@ export default (client) => {
 
         const command = client.commands.get(interaction.commandName);
 
-        if (!command) return;
+        if (!command) {
+            console.log("Command not found:", interaction.commandName);
+            return;
+        }
 
         try {
 
@@ -16,20 +19,19 @@ export default (client) => {
 
         } catch (error) {
 
-            console.error(error);
+            console.error("Command Error:", error);
 
-            if (interaction.replied || interaction.deferred) {
+            if (interaction.deferred) {
 
-                await interaction.followUp({
-                    content: "Something went wrong.",
-                    ephemeral: true,
-                });
+                await interaction.editReply(
+                    "Something went wrong."
+                );
 
-            } else {
+            } else if (!interaction.replied) {
 
                 await interaction.reply({
                     content: "Something went wrong.",
-                    ephemeral: true,
+                    flags: 64
                 });
 
             }
