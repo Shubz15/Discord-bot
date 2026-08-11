@@ -27,7 +27,7 @@ export default {
 
         } catch (error) {
 
-            console.error(error);
+            console.error("Gemini Error:", error);
 
             await interaction.editReply(
                 "Unable to get a response from Gemini."
